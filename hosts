@@ -1,0 +1,6 @@
+[routers:vars]
+username=admin
+password=cisco
+
+[routers]
+1.1.1.2
