@@ -1,0 +1,40 @@
+---
+
+- name: Run IOS ommands on remote devices
+  hosts: routers
+  connection: local
+  gather_facts: False
+
+  vars:
+    cli:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        transport: cli
+
+  tasks:
+    - name: Run show version
+      ios_command:
+        commands: show version
+        provider: "{{ cli }}"
+        
+      # Save the output to a file  
+      register: output1
+    - local_action: copy content="{{ output1.stdout }}" dest="/home/Ansible/output1.txt"
+
+    - name: Run multiple commands on remote nodes
+      ios_command:
+        commands:
+          - show version
+          - show interfaces
+        provider: "{{ cli }}"
+        
+      # Save the output to a file  
+      register: output2
+    - local_action: copy content="{{ output2.stdout }}" dest="/home/Ansible/output2.txt"
+
+
+
+
+
+ 
