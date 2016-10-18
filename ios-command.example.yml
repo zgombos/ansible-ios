@@ -11,27 +11,29 @@
         username: "{{ username }}"
         password: "{{ password }}"
         transport: cli
+        
+    run_commands:
+      - sh clock
+      - sh run
+      - sh version
+      - sh cdp nei
+      - sh proc cpu history
+      - sh ip protocols
+      - sh ip route
+      - sh ntp status
+      - sh logging
 
   tasks:
     - name: Run show version
       ios_command:
-        commands: show version
+        commands: "{{run_commands}}"
         provider: "{{ cli }}"
+        interval: 2
         
       # Save the output to a file  
-      register: output1
-    - local_action: copy content="{{ output1.stdout }}" dest="/home/Ansible/output1.txt"
+      register: output
+    - local_action: copy content="{{ output.stdout }}" dest="/home/Ansible/output.txt"
 
-    - name: Run multiple commands on remote nodes
-      ios_command:
-        commands:
-          - show version
-          - show interfaces
-        provider: "{{ cli }}"
-        
-      # Save the output to a file  
-      register: output2
-    - local_action: copy content="{{ output2.stdout }}" dest="/home/Ansible/output2.txt"
 
 
 
