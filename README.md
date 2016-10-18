@@ -1,5 +1,5 @@
 # ansible-ios
-Playbook examples for IOS
+Playbook examples for IOS.
 
 Run:
 ```
@@ -9,3 +9,4 @@ or
 ```
 /home/Ansible$ ansible-playbook -i hosts ios-command.example.yml
 ```
+Tested with: *ansible 2.1.2.0*
