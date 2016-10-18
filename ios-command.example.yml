@@ -24,7 +24,7 @@
       - sh logging
 
   tasks:
-    - name: Run show version
+    - name: Run commands
       ios_command:
         commands: "{{run_commands}}"
         provider: "{{ cli }}"
